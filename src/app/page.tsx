@@ -8,8 +8,8 @@ export default function HemitPatel() {
       <Image
         src="/hemitpatel.png"
         alt="Hemit Patel"
-        width={500}
-        height={500}
+        width={750}
+        height={750}
         className="profile-img w-40 h-40 object-cover rounded-2xl mb-6"
       />
 
