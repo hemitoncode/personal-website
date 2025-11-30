@@ -10,7 +10,7 @@ export default function HemitPatel() {
         alt="Hemit Patel"
         width={750}
         height={750}
-        className="profile-img w-40 h-40 object-cover rounded-2xl mb-6"
+        className="profile-img w-40 h-40 object-cover rounded-xl mb-6"
       />
 
       <p className="font-bold underline">&gt; What I&apos;m currently up to:</p>
