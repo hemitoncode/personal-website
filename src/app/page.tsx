@@ -24,7 +24,7 @@ export default function HemitPatel() {
         </li>
         <br />
         <li>
-          Building a buzzer system for my school by leveraging Arduino, breadboards, and perf boards. 
+          Building a <a href="https://github.com/hemitoncode/buzzer-game" target="_blank" className="text-blue-500 underline">buzzer system</a> for my school by leveraging Arduino, breadboards, and perf boards. 
         </li>
       </ul>
 
