@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hemit Patel | Personal Website",
+  title: "Hemit Patel",
   description: "Hemit Patel's Personal Website",
 };
 
