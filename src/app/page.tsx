@@ -19,7 +19,7 @@ export default function HemitPatel() {
           Building <a href="https://nextvoters.com" target="_blank" className="text-blue-500 underline">Next Voters</a>, the world&apos;s first website to leverage AI to help you become a more informed voter. 
         </li>
         <li>
-          Developing the <a href="https://instagram.com/hemitoncode" target="_blank" className="text-blue-500 underline">hemitoncode</a> Instagram brand where I share bite-sized coding tutorials and AI tips for beginners.
+          Developing the <a href="https://instagram.com/hemitonworld" target="_blank" className="text-blue-500 underline">hemitonworld</a> Instagram brand where I share bite-sized coding, AI, and general life tips for beginners.
         </li>
         <li>
           Building a <a href="https://github.com/hemitoncode/buzzer-game" target="_blank" className="text-blue-500 underline">buzzer system</a> for my school by leveraging Arduino, breadboards, and perf boards. 
