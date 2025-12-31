@@ -3,48 +3,44 @@ import React from "react";
 
 export default function HemitPatel() {
   return (
-    <div className="content p-6 max-w-3xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4">Hemit Patel</h1>
+    <div className="content p-8 max-w-5xl mx-auto text-lg">
+      <h1 className="text-5xl font-bold mb-6">Hemit Patel</h1>
       <Image
         src="/hemitpatel.png"
         alt="Hemit Patel"
-        width={750}
-        height={750}
-        className="profile-img w-40 h-40 object-cover rounded-xl mb-6"
+        width={1000}
+        height={1000}
+        className="profile-img w-64 h-64 object-cover rounded-xl mb-8"
       />
 
-      <p className="font-bold underline">&gt; What I&apos;m currently up to:</p>
-      <ul className="list-disc ml-6 mb-6">
+      <p className="font-bold underline text-2xl mb-4">&gt; What I&apos;m currently up to:</p>
+      <ul className="list-disc ml-10 mb-8 space-y-4 text-lg">
         <li>
           Building <a href="https://nextvoters.com" target="_blank" className="text-blue-500 underline">Next Voters</a>, the world&apos;s first website to leverage AI to help you become a more informed voter. 
         </li>
-        <br />
         <li>
-          Developing the <a href="https://instagram.com/hemitoncode" target="_blank" className="text-blue-500 underline">hemitoncode</a> Instagram brand where I share bite-sized coding tutorials and AI tips for beginners.
+          Developing the <a href="https://instagram.com/hemitonworld" target="_blank" className="text-blue-500 underline">hemitonworld</a> Instagram brand where I share bite-sized coding, AI, and general life tips for beginners.
         </li>
-        <br />
         <li>
           Software Engineering Internship at <span className="text-[#f0652f]">YC</span>-backed online miniature marketplace: <a href="https://miniswap.gg" target="_blank" className="text-blue-500 underline">Miniswap</a> 
         </li>
       </ul>
 
-      <p className="font-bold underline">&gt; Interested in:</p>
-      <ul className="list-disc ml-6 mb-6">
+      <p className="font-bold underline text-2xl mb-4">&gt; Interested in:</p>
+      <ul className="list-disc ml-10 mb-8 space-y-4 text-lg">
         <li>
           The upholding of democratic values through making information more accessible and digestible using AI.
         </li>
-        <br />
         <li>
           Teaching others how to code and leverage AI to improve their lives and careers.
         </li>
-        <br />
         <li>
           Random hardware tinkering, product development, and AI research.
         </li>
       </ul>
 
-      <p className="font-bold underline">&gt; Past:</p>
-      <ul className="list-disc ml-6 mb-6">
+      <p className="font-bold underline text-2xl mb-4">&gt; Past:</p>
+      <ul className="list-disc ml-10 mb-8 space-y-4 text-lg">
         <li>
           Built <a href="https://dailysat.org" target="_blank" className="text-blue-500 underline">a free SAT prep platform</a> used by thousands of students worldwide (80k+ web visitors/lifetime)
         </li>
