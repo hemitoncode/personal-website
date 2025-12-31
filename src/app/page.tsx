@@ -22,7 +22,7 @@ export default function HemitPatel() {
           Developing the <a href="https://instagram.com/hemitonworld" target="_blank" className="text-blue-500 underline">hemitonworld</a> Instagram brand where I share bite-sized coding, AI, and general life tips for beginners.
         </li>
         <li>
-          Software Engineering Internship at <span className="text-[#f0652f]">YC</span>-backed online miniature marketplace: <a href="https://miniswap.gg" target="_blank" className="text-blue-500 underline">Miniswap</a> 
+          Software Engineering Internship at <span className="text-[#f0652f] font-extrabold">YC</span>-backed online miniature marketplace: <a href="https://miniswap.gg" target="_blank" className="text-blue-500 underline">Miniswap</a> 
         </li>
       </ul>
 
