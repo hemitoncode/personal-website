@@ -24,7 +24,7 @@ export default function HemitPatel() {
         </li>
         <br />
         <li>
-          Building a <a href="https://github.com/hemitoncode/buzzer-game" target="_blank" className="text-blue-500 underline">buzzer system</a> for my school by leveraging Arduino, breadboards, and perf boards. 
+          Software Engineering Internship at <span className="text-[#f0652f]">YC</span>-backed online miniature marketplace: <a href="https://miniswap.gg" target="_blank" className="text-blue-500 underline">Miniswap</a> 
         </li>
       </ul>
 
@@ -39,7 +39,7 @@ export default function HemitPatel() {
         </li>
         <br />
         <li>
-          Hardware tinkering, product development, and AI research.
+          Random hardware tinkering, product development, and AI research.
         </li>
       </ul>
 
