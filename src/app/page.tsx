@@ -53,7 +53,7 @@ export default function HemitPatel() {
         <br />
         <li>Developed tech at <a href="https://talem.org" target="_blank" className="text-blue-500 underline">Talem</a> to help students with college/internship opportunities.</li>
         <br />
-        <li>Completed software engineering internship at a prop-tech startup, <a href="https://ghar-mates-web.vercel.app/" target="_blank" className="text-blue-500 underline">GharMates</a>.</li>
+        <li>Completed software engineering internship (now defunct) at a prop-tech startup, <a href="https://ghar-mates-web.vercel.app/" target="_blank" className="text-blue-500 underline">GharMates</a>.</li>
       </ul>
     </div>
   );
