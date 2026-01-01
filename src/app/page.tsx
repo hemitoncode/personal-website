@@ -29,7 +29,7 @@ export default function HemitPatel() {
       <p className="font-bold underline text-2xl mb-4">&gt; Interested in:</p>
       <ul className="list-disc ml-10 mb-8 space-y-4 text-lg">
         <li>
-          The upholding of democratic values through making information more accessible and digestible using AI.
+          The upholding of democratic values through making information more accessible and digestible using Artificial Intelligence.
         </li>
         <li>
           Teaching others how to code and leverage AI to improve their lives and careers.
