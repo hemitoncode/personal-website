@@ -19,7 +19,7 @@ export default function HemitPatel() {
           Building <a href="https://nextvoters.com" target="_blank" className="text-blue-500 underline">Next Voters</a>, the world&apos;s first website to leverage AI to help you become a more informed voter. 
         </li>
         <li>
-          Developing the <a href="https://instagram.com/hemitonworld" target="_blank" className="text-blue-500 underline">hemitonworld</a> Instagram brand where I share bite-sized coding, AI, and general life tips for beginners.
+          Developing the <a href="https://instagram.com/hemitonwrld" target="_blank" className="text-blue-500 underline">hemitonworld</a> Instagram brand where I share bite-sized coding, AI, and general life tips for beginners.
         </li>
         <li>
           Software Engineering Internship at <span className="text-[#f0652f] font-extrabold">YC</span>-backed online miniature marketplace: <a href="https://miniswap.gg" target="_blank" className="text-blue-500 underline">Miniswap</a> 
