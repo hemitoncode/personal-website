@@ -95,7 +95,7 @@ export default function HemitPatel() {
                   <a href="https://nextvoters.com" target="_blank" className="profile-link">
                     Next Voters
                   </a>
-                  , the world's first website to leverage AI to help you become a more informed voter.
+                  , the world&apos;s first website to leverage AI to help you become a more informed voter.
                 </span>
               </li>
               <li className="bullet-item">
