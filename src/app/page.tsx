@@ -333,7 +333,7 @@ const projects: Project[] = [
   },
   {
     name: "DailySAT",
-    url: "https://dailysat.vercel.app",
+    url: "https://dailysat.org",
     repo: "https://github.com/hemitoncode/dailysat",
     desc: "Free, open-source SAT prep platform built with Next.js, MongoDB, Redis, and Auth.js. Features an AI study planner, question bank, and community-driven contributions.",
     tags: ["TypeScript", "Next.js", "Open Source", "Live"],
