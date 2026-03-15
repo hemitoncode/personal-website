@@ -278,7 +278,7 @@ function HomePage() {
             <span className="bullet-dot" />
             <span>
               Built{" "}
-              <a href="https://dailysat.org" target="_blank" className="profile-link">a free SAT prep platform</a>{" "}
+              <a href="https://dailysat.vercel.app" target="_blank" className="profile-link">a free SAT prep platform</a>{" "}
               used by thousands of students worldwide — 80k+ lifetime visitors.
             </span>
           </li>
@@ -293,7 +293,7 @@ function HomePage() {
           <li className="bullet-item">
             <span className="bullet-dot" />
             <span>
-              Developed tech at{" "}
+              Developed AI tech (RAG CLI tools) at{" "}
               <a href="https://talem.org" target="_blank" className="profile-link">Talem</a>{" "}
               to help students discover college and internship opportunities.
             </span>
@@ -418,12 +418,12 @@ function ProjectsPage() {
 
 // ── Contact page ───────────────────────────────────────────────────────────
 const contactLinks = [
+  { icon: "@", label: "Email", handle: "hemitvpatel@gmail.com", url: "mailto:hemitpatel@gmail.com" },
+  { icon: "@", label: "Company Email", handle: "hemit@nextvoters.com", url: "mailto:hemit@nextvoters.com" },
   { icon: "⌥", label: "GitHub", handle: "@hemitoncode", url: "https://github.com/hemitoncode" },
-  { icon: "◎", label: "Instagram", handle: "@hemitonwrld", url: "https://instagram.com/hemitonwrld" },
-  { icon: "▶", label: "YouTube / TEDx", handle: "Diverse Thoughts in Society", url: "https://www.youtube.com/watch?v=D0RVK4iU9q4" },
+  { icon: "◎", label: "Instagram", handle: "@hemitoncode", url: "https://instagram.com/hemitoncode" },
   { icon: "◈", label: "LinkedIn", handle: "Hemit Patel", url: "https://www.linkedin.com/in/hemit-patel-383ab3271/" },
-  { icon: "◻", label: "Next Voters", handle: "nextvoters.com", url: "https://nextvoters.com" },
-  { icon: "◌", label: "DailySAT", handle: "dailysat.org", url: "https://dailysat.org" },
+
 ];
 
 function ContactPage() {
