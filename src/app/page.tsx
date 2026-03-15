@@ -235,7 +235,7 @@ function HomePage() {
             <span className="bullet-dot" />
             <span>
               Developing the{" "}
-              <a href="https://instagram.com/hemitonwrld" target="_blank" className="profile-link">hemitonworld</a>{" "}
+              <a href="https://instagram.com/hemitoncode" target="_blank" className="profile-link">hemitoncode</a>{" "}
               Instagram brand — bite-sized coding, AI, and life tips for beginners.
             </span>
           </li>
@@ -420,9 +420,9 @@ function ProjectsPage() {
 const contactLinks = [
   { icon: "@", label: "Email", handle: "hemitvpatel@gmail.com", url: "mailto:hemitpatel@gmail.com" },
   { icon: "@", label: "Company Email", handle: "hemit@nextvoters.com", url: "mailto:hemit@nextvoters.com" },
+    { icon: "◈", label: "LinkedIn", handle: "Hemit Patel", url: "https://www.linkedin.com/in/hemit-patel-383ab3271/" },
   { icon: "⌥", label: "GitHub", handle: "@hemitoncode", url: "https://github.com/hemitoncode" },
   { icon: "◎", label: "Instagram", handle: "@hemitoncode", url: "https://instagram.com/hemitoncode" },
-  { icon: "◈", label: "LinkedIn", handle: "Hemit Patel", url: "https://www.linkedin.com/in/hemit-patel-383ab3271/" },
 
 ];
 
