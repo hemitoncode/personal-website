@@ -278,7 +278,7 @@ function HomePage() {
             <span className="bullet-dot" />
             <span>
               Built{" "}
-              <a href="https://dailysat.vercel.app" target="_blank" className="profile-link">a free SAT prep platform</a>{" "}
+              <a href="https://www.dailysat.tech" target="_blank" className="profile-link">a free SAT prep platform</a>{" "}
               used by thousands of students worldwide — 80k+ lifetime visitors.
             </span>
           </li>
@@ -333,7 +333,7 @@ const projects: Project[] = [
   },
   {
     name: "DailySAT",
-    url: "https://dailysat.vercel.app",
+    url: "https://www.dailysat.tech",
     repo: "https://github.com/hemitoncode/dailysat",
     desc: "Free, open-source SAT prep platform built with Next.js, MongoDB, Redis, and Auth.js. Features an AI study planner, question bank, and community-driven contributions.",
     tags: ["TypeScript", "Next.js", "Open Source", "Live"],
@@ -363,7 +363,6 @@ const projects: Project[] = [
     tags: ["TypeScript", "Performance"],
     stats: [{ num: "30ms", label: "API Response" }],
   },
-
 ];
 
 function ProjectsPage() {
@@ -420,10 +419,9 @@ function ProjectsPage() {
 const contactLinks = [
   { icon: "@", label: "Email", handle: "hemitvpatel@gmail.com", url: "mailto:hemitpatel@gmail.com" },
   { icon: "@", label: "Company Email", handle: "hemit@nextvoters.com", url: "mailto:hemit@nextvoters.com" },
-    { icon: "◈", label: "LinkedIn", handle: "Hemit Patel", url: "https://www.linkedin.com/in/hemit-patel-383ab3271/" },
+  { icon: "◈", label: "LinkedIn", handle: "Hemit Patel", url: "https://www.linkedin.com/in/hemit-patel-383ab3271/" },
   { icon: "⌥", label: "GitHub", handle: "@hemitoncode", url: "https://github.com/hemitoncode" },
   { icon: "◎", label: "Instagram", handle: "@hemitoncode", url: "https://instagram.com/hemitoncode" },
-
 ];
 
 function ContactPage() {
