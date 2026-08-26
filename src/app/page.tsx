@@ -592,7 +592,7 @@ const stats = [
 ];
 
 const DOCK_BASE = 58; // resting icon size in px
-const DOCK_GROW = 36; // extra px at the cursor
+const DOCK_GROW = 22; // extra px at the cursor
 
 function Dock() {
   const [mouseX, setMouseX] = useState<number | null>(null);
