@@ -319,12 +319,6 @@ const experience: Experience[] = [
     when: "Jun 2025, Mississauga ON",
     desc: "Gave a TEDx talk at the University of Toronto Mississauga campus on how diversity of thought and open debate uphold a free and fair society.",
   },
-  {
-    company: "Royal Canadian Air Cadets",
-    role: "Air Cadet",
-    when: "Jan 2023 – Oct 2024, Brampton ON",
-    desc: "Based at 758 Argus Squadron. Attended drill, flight meetings, and kept a very well-ironed suit.",
-  },
 ];
 
 type Project = {
