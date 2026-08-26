@@ -13,7 +13,7 @@ import {
 } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
 import { HiSparkles } from "react-icons/hi2";
-import { FiArrowUp } from "react-icons/fi";
+import { FiArrowUpRight } from "react-icons/fi";
 
 const STYLES = `
   .site-root {
@@ -649,15 +649,17 @@ function Dock() {
   );
 }
 
-function ScrollTopButton() {
+function LinkedInButton() {
   return (
-    <button
+    <a
       className="corner-btn"
-      aria-label="Back to top"
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      aria-label="Open my LinkedIn"
+      href="https://www.linkedin.com/in/hemitvpatel/"
+      target="_blank"
+      rel="noreferrer"
     >
-      <FiArrowUp />
-    </button>
+      <FiArrowUpRight />
+    </a>
   );
 }
 
@@ -859,7 +861,7 @@ export default function HemitPatel() {
         </main>
 
         <Dock />
-        <ScrollTopButton />
+        <LinkedInButton />
       </div>
     </>
   );
