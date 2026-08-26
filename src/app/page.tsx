@@ -415,13 +415,6 @@ const STYLES = `
     transform: translateY(-2px);
     box-shadow: 0 8px 18px rgba(43,108,240,0.3);
   }
-  .form-hint {
-    text-align: center;
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: #9aa1ac;
-    margin-top: 0.7rem;
-  }
 
   .watermark {
     font-weight: 800;
@@ -675,9 +668,6 @@ function ContactForm() {
       <button type="submit" className="submit-btn">
         Submit
       </button>
-      <p className="form-hint">
-        No servers, no tracking — this just opens your mail app ✌️
-      </p>
     </form>
   );
 }
