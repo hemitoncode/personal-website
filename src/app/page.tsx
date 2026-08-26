@@ -87,8 +87,13 @@ const STYLES = `
   .stats-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
+    justify-content: center;
+    text-align: center;
+    gap: 2.5rem;
     margin-bottom: 2.5rem;
+  }
+  @media (max-width: 560px) {
+    .stats-row { gap: 1.3rem 1.6rem; }
   }
   .stat-num {
     font-family: var(--font-marker), cursive;
@@ -280,6 +285,9 @@ const STYLES = `
     z-index: 50;
   }
   .corner-btn:hover { transform: translateY(-3px); background: #2b6cf0; }
+  @media (max-width: 640px) {
+    .corner-btn { bottom: 6.6rem; right: 1rem; }
+  }
   .dock-dot {
     width: 4px;
     height: 4px;
