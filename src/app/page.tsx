@@ -375,7 +375,7 @@ const dockLinks = [
   },
   {
     label: "Email",
-    url: "mailto:hemitvpatel@gmail.com",
+    url: "mailto:hemit.patel.ca@gmail.com",
     icon: <IoMail />,
     tile: "icon-mail",
   },
@@ -560,8 +560,8 @@ export default function HemitPatel() {
             Find me around the web{" "}
             <span className="inline-icon" style={{ color: "#2b6cf0" }}><FiArrowUpRight /></span>{" "}
             or say hi at{" "}
-            <a href="mailto:hemitvpatel@gmail.com" className="body-link">
-              hemitvpatel@gmail.com
+            <a href="mailto:hemit.patel.ca@gmail.com" className="body-link">
+              hemit.patel.ca@gmail.com
             </a>
           </p>
 
