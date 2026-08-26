@@ -680,7 +680,7 @@ export default function HemitPatel() {
         <main className="max-w-[620px] mx-auto px-6 pt-24 pb-40">
           {/* ── Hero ── */}
           <Image
-            src="/hemitpatel.png"
+            src="/headshot.png"
             alt="Hemit Patel"
             width={1000}
             height={1000}
