@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaGithub, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
 import { HiSparkles } from "react-icons/hi2";
@@ -11,21 +11,104 @@ const STYLES = `
   .site-root {
     font-family: var(--font-jakarta), -apple-system, sans-serif;
     background-color: #eef0f3;
+    background-image:
+      linear-gradient(rgba(43,108,240,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(43,108,240,0.045) 1px, transparent 1px);
+    background-size: 28px 28px;
     min-height: 100vh;
     color: #1d1d1f;
   }
 
-  .dither {
-    height: 14px;
-    background-image: conic-gradient(#d3d7dd 25%, transparent 25% 50%, #d3d7dd 50% 75%, transparent 75%);
-    background-size: 8px 8px;
-    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  .brand-stripe {
+    height: 4px;
+    background: linear-gradient(90deg, #2b6cf0, #7fb0ff, #2b6cf0);
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: #2b6cf0;
+    font-size: 0.85rem;
+  }
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #c3cde0, transparent);
+  }
+
+  .avatar {
+    transition: transform 0.25s cubic-bezier(0.34, 1.5, 0.64, 1);
+  }
+  .avatar:hover { transform: rotate(-4deg) scale(1.06); }
+
+  .status-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: rgba(255,255,255,0.75);
+    border: 1px solid #dde3ee;
+    border-radius: 999px;
+    padding: 0.32rem 0.85rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #3c4046;
+    box-shadow: 0 1px 2px rgba(29,29,31,0.05);
+  }
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: pulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.45); }
+    50% { box-shadow: 0 0 0 5px rgba(34,197,94,0); }
+  }
+
+  .stats-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .stat-num {
+    font-family: var(--font-marker), cursive;
+    color: #2b6cf0;
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #55595f;
+    margin-top: 0.35rem;
+  }
+
+  .signature {
+    font-family: var(--font-marker), cursive;
+    color: #2b6cf0;
+    font-size: 1.15rem;
+    text-align: center;
+    margin-top: 1.6rem;
+    transform: rotate(-2deg);
   }
 
   .hello {
     font-family: var(--font-marker), cursive;
-    color: #f2622e;
+    color: #2b6cf0;
     font-size: 1.6rem;
     line-height: 1.2;
   }
@@ -36,9 +119,9 @@ const STYLES = `
 
   .headline {
     font-weight: 700;
-    font-size: 1.9rem;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
+    font-size: 1.45rem;
+    line-height: 1.4;
+    letter-spacing: -0.025em;
     color: #1d1d1f;
   }
   .headline .soft { color: #3c4046; font-weight: 600; }
@@ -62,16 +145,16 @@ const STYLES = `
     text-decoration-thickness: 1.5px;
     transition: color 0.15s;
   }
-  .body-link:hover { color: #f2622e; }
+  .body-link:hover { color: #2b6cf0; }
   .accent-link {
-    color: #f2622e;
+    color: #2b6cf0;
     font-weight: 700;
     text-decoration: none;
   }
   .accent-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   .section-title {
-    color: #f2622e;
+    color: #2b6cf0;
     font-weight: 700;
     font-size: 1.25rem;
     margin-bottom: 1.25rem;
@@ -84,13 +167,20 @@ const STYLES = `
     padding: 1.4rem 1.75rem 1.5rem;
     overflow: hidden;
     box-shadow: 0 1px 2px rgba(29,29,31,0.04);
+    border: 1px solid transparent;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .xp-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(43,108,240,0.25);
+    box-shadow: 0 10px 26px rgba(43,108,240,0.12);
   }
   .xp-card::before {
     content: "";
     position: absolute;
     top: 0; right: 0;
     width: 55%; height: 70%;
-    background: radial-gradient(ellipse at top right, rgba(242,98,46,0.45), rgba(242,98,46,0.1) 45%, rgba(242,98,46,0) 70%);
+    background: radial-gradient(ellipse at top right, rgba(43,108,240,0.4), rgba(43,108,240,0.09) 45%, rgba(43,108,240,0) 70%);
     pointer-events: none;
   }
   .xp-company { font-weight: 800; font-size: 1.15rem; color: #1d1d1f; }
@@ -106,6 +196,28 @@ const STYLES = `
   .xp-role { font-weight: 700; font-size: 0.92rem; color: #3c4046; }
   .xp-when { font-weight: 700; font-size: 0.92rem; color: #1d1d1f; position: relative; z-index: 1; }
   .xp-desc { color: #55595f; font-size: 0.95rem; line-height: 1.6; font-weight: 500; position: relative; z-index: 1; }
+  .xp-skills {
+    margin-top: 0.7rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #3c4046;
+    position: relative;
+    z-index: 1;
+  }
+  .xp-skills span { font-weight: 500; color: #55595f; }
+  .xp-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.55rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #2b6cf0;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+  }
+  .xp-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   /* ── macOS-style dock ── */
   .dock {
@@ -160,6 +272,13 @@ const STYLES = `
     transition: opacity 0.15s;
   }
   .dock-item:hover .dock-label { opacity: 1; }
+  .dock-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(29,29,31,0.4);
+    margin-top: 4px;
+  }
   .icon-linkedin { background: linear-gradient(180deg, #1a80d4, #0a66c2); }
   .icon-github { background: linear-gradient(180deg, #4a4f57, #24292f); }
   .icon-mail { background: linear-gradient(180deg, #6db2f7, #1f6ff2); }
@@ -208,6 +327,45 @@ const experience: Experience[] = [
   },
 ];
 
+type Project = {
+  name: string;
+  when: string;
+  desc: string;
+  skills: string;
+  link: { label: string; url: string } | null;
+};
+
+const projects: Project[] = [
+  {
+    name: "DailySAT",
+    when: "Aug 2024 – Sep 2025",
+    desc: "A platform to help students prepare for the SAT via a question bank, with a gamified experience of in-game credits and awards to amplify engagement. Over 100,000 lifetime visitors and ~200 daily active users.",
+    skills: "Next.js, MongoDB, Redis",
+    link: { label: "GitHub repo", url: "https://github.com/hemitoncode/DailySAT" },
+  },
+  {
+    name: "Talem",
+    when: "Jun 2024 – Aug 2025",
+    desc: "A platform that empowers students with information on internships, college admissions, and extracurricular opportunities. Over 200,000 lifetime visitors and funding raised from Emergent Ventures.",
+    skills: "React.js, Firebase",
+    link: { label: "Visit site", url: "https://talem.org" },
+  },
+  {
+    name: "Trashify",
+    when: "Jul 2024 – Aug 2024",
+    desc: "An app that finds the nearest trash bins to your location. Implemented a caching system to save API calls to an external service, which optimized response times too.",
+    skills: "Next.js, Python, RPC",
+    link: { label: "GitHub repo", url: "https://github.com/Hemit99123/trashify" },
+  },
+  {
+    name: "Everyone Classroom",
+    when: "Jun 2023 – Feb 2024",
+    desc: "An LMS system geared towards STEM students, built for Everyone STEM.",
+    skills: "JavaScript",
+    link: null,
+  },
+];
+
 const dockLinks = [
   {
     label: "LinkedIn",
@@ -235,6 +393,31 @@ const dockLinks = [
   },
 ];
 
+function TorontoClock() {
+  const [time, setTime] = useState<string | null>(null);
+  useEffect(() => {
+    const tick = () =>
+      setTime(
+        new Intl.DateTimeFormat("en-CA", {
+          hour: "numeric",
+          minute: "2-digit",
+          timeZone: "America/Toronto",
+        }).format(new Date())
+      );
+    tick();
+    const id = setInterval(tick, 30_000);
+    return () => clearInterval(id);
+  }, []);
+  return <span>📍 Toronto, Canada{time ? ` · ${time}` : ""}</span>;
+}
+
+const stats = [
+  { num: "200k+", label: "Students reached" },
+  { num: "2", label: "Startup gigs" },
+  { num: "1", label: "TEDx talk" },
+  { num: "$5k+", label: "Raised for civic ed" },
+];
+
 function Dock() {
   return (
     <nav className="dock" aria-label="Social links">
@@ -249,6 +432,7 @@ function Dock() {
         >
           <span className="dock-label">{l.label}</span>
           <span className={`dock-icon ${l.tile}`}>{l.icon}</span>
+          <span className="dock-dot" />
         </a>
       ))}
     </nav>
@@ -260,7 +444,7 @@ export default function HemitPatel() {
     <>
       <style>{STYLES}</style>
       <div className="site-root">
-        <div className="dither" />
+        <div className="brand-stripe" />
 
         <main className="max-w-[620px] mx-auto px-6 pt-24 pb-40">
           {/* ── Hero ── */}
@@ -269,8 +453,18 @@ export default function HemitPatel() {
             alt="Hemit Patel"
             width={1000}
             height={1000}
-            className="w-20 h-20 object-cover rounded-full mb-6 ring-1 ring-black/10"
+            className="avatar w-20 h-20 object-cover rounded-full mb-5 ring-2 ring-[#2b6cf0]/30"
           />
+
+          <div className="status-row">
+            <span className="chip">
+              <span className="pulse-dot" />
+              Building Frankie @ Ascendance Foundry
+            </span>
+            <span className="chip">
+              <TorontoClock />
+            </span>
+          </div>
 
           <p className="hello mb-3">
             <span className="lead">Hey, I&apos;m</span> Hemit Patel!
@@ -282,7 +476,7 @@ export default function HemitPatel() {
             <span className="inline-icon"><FaGithub /></span>{" "}
             impactful, AI-driven software{" "}
             <span className="soft">emphasizing</span>{" "}
-            <span className="inline-icon" style={{ color: "#f2622e" }}><HiSparkles /></span>{" "}
+            <span className="inline-icon" style={{ color: "#2b6cf0" }}><HiSparkles /></span>{" "}
             automation, agents, and thoughtful design.
           </h1>
 
@@ -316,7 +510,16 @@ export default function HemitPatel() {
             you&apos;re curious!).
           </p>
 
-          <div className="dither mb-10" />
+          <div className="stats-row">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <div className="stat-num">{s.num}</div>
+                <div className="stat-label">{s.label}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="divider mb-10"><HiSparkles /></div>
 
           {/* ── Work experience ── */}
           <h2 className="section-title">Current + Previous Work Experience</h2>
@@ -334,16 +537,43 @@ export default function HemitPatel() {
             ))}
           </div>
 
-          <div className="dither mt-12 mb-8" />
+          <div className="divider mt-12 mb-10"><HiSparkles /></div>
+
+          {/* ── Projects ── */}
+          <h2 className="section-title">Projects</h2>
+
+          <div className="space-y-4">
+            {projects.map((p) => (
+              <article key={p.name} className="xp-card">
+                <h3 className="xp-company">{p.name}</h3>
+                <div className="xp-meta">
+                  <span className="xp-when">{p.when}</span>
+                </div>
+                <p className="xp-desc">{p.desc}</p>
+                <p className="xp-skills">
+                  Skills: <span>{p.skills}</span>
+                </p>
+                {p.link && (
+                  <a href={p.link.url} target="_blank" rel="noreferrer" className="xp-link">
+                    {p.link.label} <FiArrowUpRight />
+                  </a>
+                )}
+              </article>
+            ))}
+          </div>
+
+          <div className="divider mt-12 mb-8"><HiSparkles /></div>
 
           <p className="body-text" style={{ fontSize: "0.9rem", textAlign: "center" }}>
             Find me around the web{" "}
-            <span className="inline-icon" style={{ color: "#f2622e" }}><FiArrowUpRight /></span>{" "}
+            <span className="inline-icon" style={{ color: "#2b6cf0" }}><FiArrowUpRight /></span>{" "}
             or say hi at{" "}
             <a href="mailto:hemitvpatel@gmail.com" className="body-link">
               hemitvpatel@gmail.com
             </a>
           </p>
+
+          <p className="signature">— built by Hemit, one commit at a time ✌️</p>
         </main>
 
         <Dock />
