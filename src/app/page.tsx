@@ -424,8 +424,9 @@ const STYLES = `
 
   .watermark {
     font-weight: 800;
-    font-size: clamp(4.5rem, 19vw, 11rem);
+    font-size: clamp(2.6rem, 11vw, 6rem);
     line-height: 0.9;
+    white-space: nowrap;
     text-align: center;
     letter-spacing: -0.05em;
     margin-top: 2.5rem;
@@ -821,7 +822,7 @@ export default function HemitPatel() {
 
           <p className="signature">— built by Hemit, one commit at a time ✌️</p>
 
-          <div className="watermark" aria-hidden="true">Hemit</div>
+          <div className="watermark" aria-hidden="true">Hemit Patel</div>
         </main>
 
         <Dock />
