@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
 import { HiSparkles } from "react-icons/hi2";
+import { FiArrowUp } from "react-icons/fi";
 
 const STYLES = `
   .site-root {
@@ -229,18 +230,14 @@ const STYLES = `
     align-items: center;
   }
   .dock-icon {
-    width: 3.6rem;
-    height: 3.6rem;
-    border-radius: 1rem;
+    border-radius: 28%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 1.65rem;
     box-shadow: inset 0 1px 1px rgba(255,255,255,0.45), 0 3px 8px rgba(29,29,31,0.22);
-    transition: transform 0.1s ease-out;
-    transform-origin: bottom center;
-    will-change: transform;
+    transition: width 0.1s ease-out, height 0.1s ease-out, font-size 0.1s ease-out;
+    will-change: width, height;
   }
   .icon-linkedin { background: linear-gradient(180deg, #1a80d4, #0a66c2); }
   .icon-github { background: linear-gradient(180deg, #4a4f57, #24292f); }
@@ -263,6 +260,26 @@ const STYLES = `
     transition: opacity 0.15s;
   }
   .dock-item:hover .dock-label { opacity: 1; }
+  .corner-btn {
+    position: fixed;
+    bottom: 1.3rem;
+    right: 1.3rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: none;
+    background: #1d1d1f;
+    color: #fff;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(29,29,31,0.25);
+    transition: transform 0.15s, background 0.15s;
+    z-index: 50;
+  }
+  .corner-btn:hover { transform: translateY(-3px); background: #2b6cf0; }
   .dock-dot {
     width: 4px;
     height: 4px;
@@ -574,22 +591,26 @@ const stats = [
   { num: "10+", label: "Hrs/week automated" },
 ];
 
+const DOCK_BASE = 58; // resting icon size in px
+const DOCK_GROW = 36; // extra px at the cursor
+
 function Dock() {
   const [mouseX, setMouseX] = useState<number | null>(null);
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
-  // macOS-style magnification: scale falls off with cursor distance,
-  // so neighbours of the hovered icon grow partially too.
-  const scaleFor = (i: number) => {
-    if (mouseX === null) return 1;
+  // macOS-style magnification: icons resize in layout (not transform),
+  // so the bar itself widens and neighbours get pushed apart as sizes
+  // grade with cursor distance.
+  const sizeFor = (i: number) => {
+    if (mouseX === null) return DOCK_BASE;
     const el = itemRefs.current[i];
-    if (!el) return 1;
+    if (!el) return DOCK_BASE;
     const rect = el.getBoundingClientRect();
     const center = rect.left + rect.width / 2;
     const distance = Math.abs(mouseX - center);
-    const range = 140;
-    if (distance > range) return 1;
-    return 1 + 0.6 * Math.cos((distance / range) * (Math.PI / 2));
+    const range = 150;
+    if (distance > range) return DOCK_BASE;
+    return DOCK_BASE + DOCK_GROW * Math.cos((distance / range) * (Math.PI / 2));
   };
 
   return (
@@ -600,7 +621,7 @@ function Dock() {
       onMouseLeave={() => setMouseX(null)}
     >
       {dockLinks.map((l, i) => {
-        const s = scaleFor(i);
+        const s = sizeFor(i);
         return (
           <a
             key={l.label}
@@ -616,7 +637,7 @@ function Dock() {
             <span className="dock-label">{l.label}</span>
             <span
               className={`dock-icon ${l.tile}`}
-              style={{ transform: `scale(${s}) translateY(${-(s - 1) * 14}px)` }}
+              style={{ width: s, height: s, fontSize: s * 0.46 }}
             >
               {l.icon}
             </span>
@@ -625,6 +646,18 @@ function Dock() {
         );
       })}
     </nav>
+  );
+}
+
+function ScrollTopButton() {
+  return (
+    <button
+      className="corner-btn"
+      aria-label="Back to top"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+    >
+      <FiArrowUp />
+    </button>
   );
 }
 
@@ -826,6 +859,7 @@ export default function HemitPatel() {
         </main>
 
         <Dock />
+        <ScrollTopButton />
       </div>
     </>
   );
