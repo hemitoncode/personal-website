@@ -231,20 +231,23 @@ const STYLES = `
   .dock-icon {
     width: 3rem;
     height: 3rem;
-    border-radius: 50%;
+    border-radius: 0.85rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
-    color: #3c4046;
-    font-size: 1.25rem;
-    border: 1px solid #e4e8ef;
-    box-shadow: 0 2px 6px rgba(29,29,31,0.08);
-    transition: transform 0.1s ease-out, color 0.15s;
+    color: #fff;
+    font-size: 1.4rem;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.45), 0 3px 8px rgba(29,29,31,0.22);
+    transition: transform 0.1s ease-out;
     transform-origin: bottom center;
     will-change: transform;
   }
-  .dock-item:hover .dock-icon { color: #2b6cf0; }
+  .icon-linkedin { background: linear-gradient(180deg, #1a80d4, #0a66c2); }
+  .icon-github { background: linear-gradient(180deg, #4a4f57, #24292f); }
+  .icon-mail { background: linear-gradient(180deg, #6db2f7, #1f6ff2); }
+  .icon-instagram {
+    background: radial-gradient(circle at 30% 110%, #fdc468 0%, #f75356 45%, #c13584 75%, #833ab4 100%);
+  }
   .dock-label {
     position: absolute;
     bottom: calc(100% + 0.9rem);
@@ -523,21 +526,25 @@ const dockLinks = [
     label: "LinkedIn",
     url: "https://www.linkedin.com/in/hemitvpatel/",
     icon: <FaLinkedinIn />,
+    tile: "icon-linkedin",
   },
   {
     label: "GitHub",
     url: "https://github.com/hemitoncode",
     icon: <FaGithub />,
+    tile: "icon-github",
   },
   {
     label: "Email",
     url: "mailto:hemit.patel.ca@gmail.com",
     icon: <IoMail />,
+    tile: "icon-mail",
   },
   {
     label: "Instagram",
     url: "https://instagram.com/hemitoncode",
     icon: <FaInstagram />,
+    tile: "icon-instagram",
   },
 ];
 
@@ -607,7 +614,7 @@ function Dock() {
           >
             <span className="dock-label">{l.label}</span>
             <span
-              className="dock-icon"
+              className={`dock-icon ${l.tile}`}
               style={{ transform: `scale(${s}) translateY(${-(s - 1) * 14}px)` }}
             >
               {l.icon}
