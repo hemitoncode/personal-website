@@ -1,11 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { FaGithub, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  FaGithub,
+  FaLinkedinIn,
+  FaInstagram,
+  FaBookOpen,
+  FaGraduationCap,
+  FaRecycle,
+  FaChalkboardTeacher,
+} from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
 import { HiSparkles } from "react-icons/hi2";
-import { FiArrowUpRight } from "react-icons/fi";
 
 const STYLES = `
   .site-root {
@@ -196,28 +203,6 @@ const STYLES = `
   .xp-role { font-weight: 700; font-size: 0.92rem; color: #3c4046; }
   .xp-when { font-weight: 700; font-size: 0.92rem; color: #1d1d1f; position: relative; z-index: 1; }
   .xp-desc { color: #55595f; font-size: 0.95rem; line-height: 1.6; font-weight: 500; position: relative; z-index: 1; }
-  .xp-skills {
-    margin-top: 0.7rem;
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: #3c4046;
-    position: relative;
-    z-index: 1;
-  }
-  .xp-skills span { font-weight: 500; color: #55595f; }
-  .xp-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    margin-top: 0.55rem;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #2b6cf0;
-    text-decoration: none;
-    position: relative;
-    z-index: 1;
-  }
-  .xp-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   /* ── macOS-style dock ── */
   .dock {
@@ -246,17 +231,20 @@ const STYLES = `
   .dock-icon {
     width: 3rem;
     height: 3rem;
-    border-radius: 0.85rem;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    font-size: 1.4rem;
-    box-shadow: inset 0 1px 1px rgba(255,255,255,0.45), 0 3px 8px rgba(29,29,31,0.22);
-    transition: transform 0.18s cubic-bezier(0.34, 1.4, 0.64, 1);
+    background: #fff;
+    color: #3c4046;
+    font-size: 1.25rem;
+    border: 1px solid #e4e8ef;
+    box-shadow: 0 2px 6px rgba(29,29,31,0.08);
+    transition: transform 0.1s ease-out, color 0.15s;
     transform-origin: bottom center;
+    will-change: transform;
   }
-  .dock-item:hover .dock-icon { transform: scale(1.22) translateY(-5px); }
+  .dock-item:hover .dock-icon { color: #2b6cf0; }
   .dock-label {
     position: absolute;
     bottom: calc(100% + 0.9rem);
@@ -279,11 +267,171 @@ const STYLES = `
     background: rgba(29,29,31,0.4);
     margin-top: 4px;
   }
-  .icon-linkedin { background: linear-gradient(180deg, #1a80d4, #0a66c2); }
-  .icon-github { background: linear-gradient(180deg, #4a4f57, #24292f); }
-  .icon-mail { background: linear-gradient(180deg, #6db2f7, #1f6ff2); }
-  .icon-instagram {
-    background: radial-gradient(circle at 30% 110%, #fdc468 0%, #f75356 45%, #c13584 75%, #833ab4 100%);
+  /* ── Project cards ── */
+  .section-sub {
+    color: #55595f;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: -0.75rem 0 1.25rem;
+  }
+  .proj-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+  }
+  @media (max-width: 560px) {
+    .proj-grid { grid-template-columns: 1fr; }
+  }
+  .proj-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #f5f6f8;
+    border: 1px solid #e7eaf0;
+    box-shadow: 0 1px 2px rgba(29,29,31,0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .proj-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(43,108,240,0.3);
+    box-shadow: 0 10px 26px rgba(43,108,240,0.12);
+  }
+  .proj-top {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 2.4rem 1rem 1.5rem;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(43,108,240,0.06) 0 2px,
+      transparent 2px 11px
+    );
+  }
+  .proj-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: #3c4046;
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.38rem 0.85rem;
+    border-radius: 9px;
+    text-decoration: none;
+    transition: background 0.15s, transform 0.15s;
+  }
+  .proj-btn:hover { background: #2b6cf0; transform: translateY(-1px); }
+  .proj-icon {
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.45), 0 4px 10px rgba(29,29,31,0.18);
+    transition: transform 0.2s cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
+  .proj-card:hover .proj-icon { transform: scale(1.12) translateY(-3px); }
+  .proj-name { font-weight: 800; font-size: 1.02rem; }
+  .proj-bottom {
+    flex: 1;
+    background: #e9ecf1;
+    padding: 0.95rem 1.15rem 1.05rem;
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: #55595f;
+    line-height: 1.55;
+  }
+  .proj-when {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #3c4046;
+    margin-bottom: 0.35rem;
+  }
+  .tile-blue { background: linear-gradient(180deg, #4f8df7, #2b6cf0); }
+  .tile-purple { background: linear-gradient(180deg, #a78bfa, #7c3aed); }
+  .tile-green { background: linear-gradient(180deg, #4ade80, #16a34a); }
+  .tile-amber { background: linear-gradient(180deg, #fbbf24, #d97706); }
+
+  /* ── Reach out form ── */
+  .contact-card {
+    background: #f5f6f8;
+    border: 1px solid #e7eaf0;
+    border-radius: 16px;
+    padding: 1.6rem;
+    box-shadow: 0 1px 2px rgba(29,29,31,0.04);
+  }
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+  .form-field {
+    flex: 1;
+    min-width: 200px;
+    background: #fff;
+    border: 1.5px solid #d5dbe6;
+    border-radius: 10px;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.9rem;
+    font-family: inherit;
+    font-weight: 500;
+    color: #1d1d1f;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .form-field::placeholder { color: #9aa1ac; }
+  .form-field:focus {
+    outline: none;
+    border-color: #2b6cf0;
+    box-shadow: 0 0 0 3px rgba(43,108,240,0.15);
+  }
+  textarea.form-field { width: 100%; resize: vertical; min-height: 90px; }
+  .submit-btn {
+    display: block;
+    margin: 0.9rem auto 0;
+    background: #2b6cf0;
+    color: #fff;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.6rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+  }
+  .submit-btn:hover {
+    background: #1f5cd9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(43,108,240,0.3);
+  }
+  .form-hint {
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #9aa1ac;
+    margin-top: 0.7rem;
+  }
+
+  .watermark {
+    font-weight: 800;
+    font-size: clamp(4.5rem, 19vw, 11rem);
+    line-height: 0.9;
+    text-align: center;
+    letter-spacing: -0.05em;
+    margin-top: 2.5rem;
+    user-select: none;
+    color: transparent;
+    background: linear-gradient(180deg, rgba(43,108,240,0.16), rgba(43,108,240,0));
+    -webkit-background-clip: text;
+    background-clip: text;
+    pointer-events: none;
   }
 `;
 
@@ -326,30 +474,38 @@ type Project = {
   when: string;
   desc: string;
   skills: string;
-  link: { label: string; url: string } | null;
+  link: string | null;
+  icon: React.ReactNode;
+  tile: string;
 };
 
 const projects: Project[] = [
   {
     name: "DailySAT",
     when: "Aug 2024 – Sep 2025",
-    desc: "A platform to help students prepare for the SAT via a question bank, with a gamified experience of in-game credits and awards to amplify engagement. Over 100,000 lifetime visitors and ~200 daily active users.",
+    desc: "A platform to help students prepare for the SAT via a question bank, with a gamified experience of in-game credits and awards. Over 100,000 lifetime visitors and ~200 daily active users.",
     skills: "Next.js, MongoDB, Redis",
-    link: { label: "GitHub repo", url: "https://github.com/hemitoncode/DailySAT" },
+    link: "https://github.com/hemitoncode/DailySAT",
+    icon: <FaBookOpen />,
+    tile: "tile-blue",
   },
   {
     name: "Talem",
     when: "Jun 2024 – Aug 2025",
     desc: "A platform that empowers students with information on internships, college admissions, and extracurricular opportunities. Over 200,000 lifetime visitors and funding raised from Emergent Ventures.",
     skills: "React.js, Firebase",
-    link: { label: "Visit site", url: "https://talem.org" },
+    link: "https://talem.org",
+    icon: <FaGraduationCap />,
+    tile: "tile-purple",
   },
   {
     name: "Trashify",
     when: "Jul 2024 – Aug 2024",
     desc: "An app that finds the nearest trash bins to your location. Implemented a caching system to save API calls to an external service, which optimized response times too.",
     skills: "Next.js, Python, RPC",
-    link: { label: "GitHub repo", url: "https://github.com/Hemit99123/trashify" },
+    link: "https://github.com/Hemit99123/trashify",
+    icon: <FaRecycle />,
+    tile: "tile-green",
   },
   {
     name: "Everyone Classroom",
@@ -357,6 +513,8 @@ const projects: Project[] = [
     desc: "An LMS system geared towards STEM students, built for Everyone STEM.",
     skills: "JavaScript",
     link: null,
+    icon: <FaChalkboardTeacher />,
+    tile: "tile-amber",
   },
 ];
 
@@ -365,25 +523,21 @@ const dockLinks = [
     label: "LinkedIn",
     url: "https://www.linkedin.com/in/hemitvpatel/",
     icon: <FaLinkedinIn />,
-    tile: "icon-linkedin",
   },
   {
     label: "GitHub",
     url: "https://github.com/hemitoncode",
     icon: <FaGithub />,
-    tile: "icon-github",
   },
   {
     label: "Email",
     url: "mailto:hemit.patel.ca@gmail.com",
     icon: <IoMail />,
-    tile: "icon-mail",
   },
   {
     label: "Instagram",
     url: "https://instagram.com/hemitoncode",
     icon: <FaInstagram />,
-    tile: "icon-instagram",
   },
 ];
 
@@ -413,23 +567,106 @@ const stats = [
 ];
 
 function Dock() {
+  const [mouseX, setMouseX] = useState<number | null>(null);
+  const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+
+  // macOS-style magnification: scale falls off with cursor distance,
+  // so neighbours of the hovered icon grow partially too.
+  const scaleFor = (i: number) => {
+    if (mouseX === null) return 1;
+    const el = itemRefs.current[i];
+    if (!el) return 1;
+    const rect = el.getBoundingClientRect();
+    const center = rect.left + rect.width / 2;
+    const distance = Math.abs(mouseX - center);
+    const range = 110;
+    if (distance > range) return 1;
+    return 1 + 0.4 * Math.cos((distance / range) * (Math.PI / 2));
+  };
+
   return (
-    <nav className="dock" aria-label="Social links">
-      {dockLinks.map((l) => (
-        <a
-          key={l.label}
-          href={l.url}
-          target="_blank"
-          rel="noreferrer"
-          className="dock-item"
-          aria-label={l.label}
-        >
-          <span className="dock-label">{l.label}</span>
-          <span className={`dock-icon ${l.tile}`}>{l.icon}</span>
-          <span className="dock-dot" />
-        </a>
-      ))}
+    <nav
+      className="dock"
+      aria-label="Social links"
+      onMouseMove={(e) => setMouseX(e.clientX)}
+      onMouseLeave={() => setMouseX(null)}
+    >
+      {dockLinks.map((l, i) => {
+        const s = scaleFor(i);
+        return (
+          <a
+            key={l.label}
+            ref={(el) => {
+              itemRefs.current[i] = el;
+            }}
+            href={l.url}
+            target="_blank"
+            rel="noreferrer"
+            className="dock-item"
+            aria-label={l.label}
+          >
+            <span className="dock-label">{l.label}</span>
+            <span
+              className="dock-icon"
+              style={{ transform: `scale(${s}) translateY(${-(s - 1) * 14}px)` }}
+            >
+              {l.icon}
+            </span>
+            <span className="dock-dot" />
+          </a>
+        );
+      })}
     </nav>
+  );
+}
+
+function ContactForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(
+      `Hey Hemit — ${name || "someone from your website"}`
+    );
+    const body = encodeURIComponent(
+      `${message}\n\n— ${name}${email ? ` (${email})` : ""}`
+    );
+    window.location.href = `mailto:hemit.patel.ca@gmail.com?subject=${subject}&body=${body}`;
+  };
+
+  return (
+    <form className="contact-card" onSubmit={submit}>
+      <div className="form-row">
+        <input
+          className="form-field"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          className="form-field"
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <textarea
+        className="form-field"
+        placeholder="Message"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        required
+      />
+      <button type="submit" className="submit-btn">
+        Submit
+      </button>
+      <p className="form-hint">
+        No servers, no tracking — this just opens your mail app ✌️
+      </p>
+    </form>
   );
 }
 
@@ -533,39 +770,51 @@ export default function HemitPatel() {
 
           {/* ── Projects ── */}
           <h2 className="section-title">Projects</h2>
+          <p className="section-sub">Some things I&apos;ve developed over the past few years:</p>
 
-          <div className="space-y-4">
+          <div className="proj-grid">
             {projects.map((p) => (
-              <article key={p.name} className="xp-card">
-                <h3 className="xp-company">{p.name}</h3>
-                <div className="xp-meta">
-                  <span className="xp-when">{p.when}</span>
+              <article key={p.name} className="proj-card">
+                <div className="proj-top">
+                  {p.link && (
+                    <a href={p.link} target="_blank" rel="noreferrer" className="proj-btn">
+                      View Project
+                    </a>
+                  )}
+                  <span className={`proj-icon ${p.tile}`}>{p.icon}</span>
+                  <span className="proj-name">{p.name}</span>
                 </div>
-                <p className="xp-desc">{p.desc}</p>
-                <p className="xp-skills">
-                  Skills: <span>{p.skills}</span>
-                </p>
-                {p.link && (
-                  <a href={p.link.url} target="_blank" rel="noreferrer" className="xp-link">
-                    {p.link.label} <FiArrowUpRight />
-                  </a>
-                )}
+                <div className="proj-bottom">
+                  <p className="proj-when">{p.when} · {p.skills}</p>
+                  {p.desc}
+                </div>
               </article>
             ))}
           </div>
 
-          <div className="divider mt-12 mb-8"><HiSparkles /></div>
+          <div className="divider mt-12 mb-10"><HiSparkles /></div>
 
-          <p className="body-text" style={{ fontSize: "0.9rem", textAlign: "center" }}>
-            Find me around the web{" "}
-            <span className="inline-icon" style={{ color: "#2b6cf0" }}><FiArrowUpRight /></span>{" "}
-            or say hi at{" "}
-            <a href="mailto:hemit.patel.ca@gmail.com" className="body-link">
-              hemit.patel.ca@gmail.com
+          {/* ── Reach out ── */}
+          <h2 className="section-title">Reach Out!</h2>
+          <p className="body-text mb-6">
+            I love learning about what others are building — feel free to reach
+            out through the form below, or connect with me on{" "}
+            <a
+              href="https://www.linkedin.com/in/hemitvpatel/"
+              target="_blank"
+              rel="noreferrer"
+              className="body-link"
+            >
+              LinkedIn
             </a>
+            .
           </p>
 
+          <ContactForm />
+
           <p className="signature">— built by Hemit, one commit at a time ✌️</p>
+
+          <div className="watermark" aria-hidden="true">Hemit</div>
         </main>
 
         <Dock />
