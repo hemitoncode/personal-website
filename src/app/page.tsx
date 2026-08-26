@@ -588,7 +588,6 @@ const stats = [
   { num: "200k+", label: "Students reached" },
   { num: "2", label: "Startup gigs" },
   { num: "1", label: "TEDx talk" },
-  { num: "10+", label: "Hrs/week automated" },
 ];
 
 const DOCK_BASE = 58; // resting icon size in px
