@@ -415,7 +415,7 @@ const stats = [
   { num: "200k+", label: "Students reached" },
   { num: "2", label: "Startup gigs" },
   { num: "1", label: "TEDx talk" },
-  { num: "$5k+", label: "Raised for civic ed" },
+  { num: "10+", label: "Hrs/week automated" },
 ];
 
 function Dock() {
@@ -501,12 +501,10 @@ export default function HemitPatel() {
               className="accent-link"
             >
               TEDx speaker
-            </a>{" "}
-            and the co-founder of{" "}
-            <a href="https://nextvoters.com" target="_blank" rel="noreferrer" className="accent-link">
-              Next Voters
             </a>
-            , a civic-education platform for young voters across North America (reach out if
+            , and these days I&apos;m building at{" "}
+            <span className="accent-link">Ascendance Foundry</span>, an AI-native
+            consulting firm where I&apos;m the youngest hire on the team (reach out if
             you&apos;re curious!).
           </p>
 
