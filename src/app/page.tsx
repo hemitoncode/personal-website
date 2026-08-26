@@ -13,7 +13,6 @@ import {
 } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
 import { HiSparkles } from "react-icons/hi2";
-import { FiArrowUpRight } from "react-icons/fi";
 
 const STYLES = `
   .site-root {
@@ -265,29 +264,6 @@ const STYLES = `
     transition: opacity 0.15s;
   }
   .dock-item:hover .dock-label { opacity: 1; }
-  .corner-btn {
-    position: fixed;
-    bottom: 1.3rem;
-    right: 1.3rem;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    border: none;
-    background: #1d1d1f;
-    color: #fff;
-    font-size: 1.15rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(29,29,31,0.25);
-    transition: transform 0.15s, background 0.15s;
-    z-index: 50;
-  }
-  .corner-btn:hover { transform: translateY(-3px); background: #2b6cf0; }
-  @media (max-width: 640px) {
-    .corner-btn { bottom: 6.6rem; right: 1rem; }
-  }
   .dock-dot {
     width: 4px;
     height: 4px;
@@ -656,20 +632,6 @@ function Dock() {
   );
 }
 
-function LinkedInButton() {
-  return (
-    <a
-      className="corner-btn"
-      aria-label="Open my LinkedIn"
-      href="https://www.linkedin.com/in/hemitvpatel/"
-      target="_blank"
-      rel="noreferrer"
-    >
-      <FiArrowUpRight />
-    </a>
-  );
-}
-
 function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -868,7 +830,6 @@ export default function HemitPatel() {
         </main>
 
         <Dock />
-        <LinkedInButton />
       </div>
     </>
   );
