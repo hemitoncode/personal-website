@@ -212,8 +212,8 @@ const STYLES = `
     transform: translateX(-50%);
     display: flex;
     align-items: flex-end;
-    gap: 0.7rem;
-    padding: 0.55rem 0.75rem;
+    gap: 0.85rem;
+    padding: 0.65rem 0.9rem;
     background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(18px) saturate(1.6);
     -webkit-backdrop-filter: blur(18px) saturate(1.6);
@@ -229,14 +229,14 @@ const STYLES = `
     align-items: center;
   }
   .dock-icon {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 0.85rem;
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 1.4rem;
+    font-size: 1.65rem;
     box-shadow: inset 0 1px 1px rgba(255,255,255,0.45), 0 3px 8px rgba(29,29,31,0.22);
     transition: transform 0.1s ease-out;
     transform-origin: bottom center;
@@ -587,9 +587,9 @@ function Dock() {
     const rect = el.getBoundingClientRect();
     const center = rect.left + rect.width / 2;
     const distance = Math.abs(mouseX - center);
-    const range = 110;
+    const range = 140;
     if (distance > range) return 1;
-    return 1 + 0.4 * Math.cos((distance / range) * (Math.PI / 2));
+    return 1 + 0.6 * Math.cos((distance / range) * (Math.PI / 2));
   };
 
   return (
