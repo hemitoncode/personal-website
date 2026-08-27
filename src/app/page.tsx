@@ -443,7 +443,7 @@ type Experience = {
 const experience: Experience[] = [
   {
     company: "Ascendance Foundry",
-    role: "Software Engineering Fellow",
+    role: "Software Engineering Intern",
     when: "Jun 2026 – Present, Toronto ON",
     desc: "Youngest hire at an AI-native consulting firm. Building Frankie, a bookkeeping app that takes SMBs from bank records to financial reporting — including an ingestion engine for credit card, chequing, and brokerage statements.",
   },
