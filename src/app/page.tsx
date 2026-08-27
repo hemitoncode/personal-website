@@ -449,7 +449,7 @@ const experience: Experience[] = [
   },
   {
     company: "Miniswap (YC F25)",
-    role: "Software Engineering Intern",
+    role: "Software Engineer Intern",
     when: "Jan 2026 – May 2026, San Francisco CA",
     desc: "Worked directly with YC founders to help double the product catalogue: built an AI-powered ingestion pipeline with GPT-4o Vision, automated runs with Temporal (~10 hrs/week saved), and shipped a QA agent on the Claude Agent SDK.",
   },
