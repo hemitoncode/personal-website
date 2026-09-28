@@ -443,9 +443,15 @@ type Experience = {
 const experience: Experience[] = [
   {
     company: "Ascendance Foundry",
+    role: "AI Consultant",
+    when: "Sep 2026 – Present, Toronto ON",
+    desc: "Helping build the framework for responsibly deploying AI agents within a business setting.",
+  },
+  {
+    company: "Ascendance Foundry",
     role: "Software Engineer Intern",
-    when: "Jun 2026 – Present, Toronto ON",
-    desc: "Youngest hire at an AI-native consulting firm. Building Frankie, a bookkeeping app that takes SMBs from bank records to financial reporting — including an ingestion engine for credit card, chequing, and brokerage statements.",
+    when: "Jun 2026 – Aug 2026, Toronto ON",
+    desc: "Youngest hire at an AI-native consulting firm. Built Frankie, a bookkeeping app that takes SMBs from bank records to financial reporting — including an ingestion engine for credit card, chequing, and brokerage statements.",
   },
   {
     company: "Miniswap (YC F25)",
@@ -757,7 +763,7 @@ export default function HemitPatel() {
 
           <div className="space-y-4">
             {experience.map((xp) => (
-              <article key={xp.company} className="xp-card">
+              <article key={`${xp.company}-${xp.role}`} className="xp-card">
                 <h3 className="xp-company">{xp.company}</h3>
                 <div className="xp-meta">
                   <span className="xp-role">{xp.role}</span>
